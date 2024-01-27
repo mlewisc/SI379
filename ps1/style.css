@@ -1,0 +1,48 @@
+#score { /* The score display */
+    font-size: 2em; /* 2em = 2 times the font size of the parent element */
+    text-align: center;
+}
+
+#game-board { /* The game board */
+    margin: auto; /* Center the game board */
+}
+
+#game-board .hole { /* Selector means an element with class hole inside the game-board element */
+    width: 100px; /* Make every hole 100 x 100 pixels */
+    height: 100px;
+
+    background-color: #FFCB05; /* Michigan maize! https://brand.umich.edu/design-resources/colors/ Yay! */
+    cursor: pointer;
+    background-size: cover; /* When displaying a background image, make it fill the hole */
+    background-repeat: no-repeat; /* And only show up once */
+}
+
+#game-board .hole:hover { /* Selector means when we are hovering over an element with class hole inside the game-board element */
+    outline: 2px solid #00274C; /* Michigan blue! https://brand.umich.edu/design-resources/colors/ Yay! */
+}
+
+#game-board .hole.needs-whack { /* Selector means an element with classes hole *and* needs-whack inside the game-board element */
+    background-color: #BA0C2F; /* Ohio State scarlet. https://brand.cfaes.ohio-state.edu/guidelines/brand-guidelines/color Yuck! */
+    background-image: url('images/happy_brutus.png'); /* Boo! */
+    animation: popUp 0.5s ease-out forwards; /* Make the background image pop up from bottom to top */
+}
+
+#game-board .hole.animating-whack { /* Selector means an element with classes hole *and* needs-whack inside the game-board element */
+    background-color: #A7B1B7; /* Ohio State gray. https://brand.cfaes.ohio-state.edu/guidelines/brand-guidelines/color Yuck! */
+    background-image: url('images/sad_brutus.png'); /* Still, boo! */
+    animation: popDown 0.5s ease-in forwards; /* Make the background image pop down from top to bottom */
+}
+
+
+/* Animations: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations*/
+
+@keyframes popUp { /* Make the background image pop up from bottom to top */
+    0%   { background-position: 0% 100px; }
+    100% { background-position: 0% 0%; }
+}
+
+
+@keyframes popDown { /* Make the background image pop down from top to bottom */
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 0% 100px; }
+}
