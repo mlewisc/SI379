@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Problem Set 2</title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <script src="utils.js"></script>
+        <script src="main.js" defer></script> <!-- The 'defer' attribute ensures the script is executed after the HTML is parsed -->
+    </head>
+    <body>
+        <main>
+            <div id="guesses"></div> <!-- Will contain feedback on guesses -->
+            <!-- The input where users will enter guesses -->
+            <input placeholder="Enter a guess" type="text" id="guess-inp" maxlength="5" minlength="5"/>
+            <!-- Will display information messages (like if a guess is not valid). 
+                 Initially hidden with 'hidden' class -->
+            <div id="info-message" class="hidden"></div>
+        </main>
+    </body>
+</html>

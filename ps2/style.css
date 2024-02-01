@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Use sans-serif fonts on the page */
+    margin-top: 50px; /* Add a margin to the top of the page */
+}
+
+input#guess-inp { /* The guess input box */
+    width: calc((50px + 2px) * 5); /* Match the width of the guess boxes */
+    font-size: 1.5em; /* Make the font size larger */
+    display: block; /* Make the input box a block element */
+    margin: auto; /* Center the input box */
+    text-align: center; /* Make the text center-aligned */
+    margin-top: 5px;
+}
+
+
+#info-message { /* The info message (e.g., when the user enters an invalid word */
+    color: grey;
+    text-align: center;
+}
+#info-message.hidden { display: none; } /* When hidden, don't take up space */
+
+#guesses { /* The table of past guesses */
+    display: table;
+    margin: auto; /* Center the table */
+    border-spacing: 2px; /* Add some spacing between the cells */
+}
+#guesses > .guess { display: table-row; }
+#guesses > .guess > .letter {
+    color: white;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    text-transform: capitalize;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 1.5em; /* Make the font size larger */
+}
+#guesses > .guess > .letter.absent  { background-color: #3a3a3c; } /* The letter is not in the word */
+#guesses > .guess > .letter.present { background-color: #b59f3b; } /* The letter is in the word but not in the correct position */
+#guesses > .guess > .letter.correct { background-color: #538d4e; } /* The letter is in the word and in the correct position */
