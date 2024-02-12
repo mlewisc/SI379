@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="events-api.js" defer></script>
+        <script src="main.js" defer></script>
+        <style>
+            body {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            img#selected-image {
+                max-width: 400px;
+                max-height: 400px;
+                margin: auto;
+                display: block;
+            }
+            a#selected-title {
+                text-align: center;
+                display: block;
+                font-size: 2em;
+                font-weight: bold;
+                margin-top: 1em;
+                text-decoration: none;;
+            }
+            p#selected-description {
+                text-align: justify;
+                max-height: 150px;
+                overflow-y: auto;
+            }
+            #thumbnails img {
+                max-width: 50px;
+                max-height: 50px;
+                margin-left: 5px;
+                margin-right: 5px;
+                overflow-x: scroll;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+
+            #thumbnails img:not(.selected) { /* Anything that is not selected */
+                opacity: 0.3;
+            }
+            #thumbnails img.selected {
+                outline: 4px solid #00274C; /* The selected image should have a blue outline */
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div id="thumbnails">
+            </div>
+            <div id="selected">
+                <img id="selected-image" />
+                <a id="selected-title" target="_blank"></a>
+                <span id="selected-date"></span>
+                <span id="selected-location"></span>
+                <p id="selected-description"></p>
+            </div>
+        </main>
+    </body>
+</html>
