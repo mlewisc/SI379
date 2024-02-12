@@ -7,10 +7,11 @@ const image = document.querySelector('#selected-image');
 const date = document.querySelector('#selected-date');
 const description = document.querySelector('#selected-description');
 
+// API info
 let umEvents;
 let timerId;
 // Keep track of the ID of the current selected thumbnail
-let currentSelectedId;
+let currentSelectedId = 0;
 
 function showSelectedInfo(selectedId) {
     // Collect the event image source and add to the DOM
@@ -28,12 +29,10 @@ function showSelectedInfo(selectedId) {
 }
 
 function updateSelected(newSelectedId) {
-    if (currentSelectedId != undefined) {
-        // Query the current selected thumbnail
-        const current_img = document.querySelector(`#n${currentSelectedId}`);
-        // Remove the selected from the current thumbnail
-        current_img.classList.remove('selected');
-    }
+    // Query the current selected thumbnail
+    const current_img = document.querySelector(`#n${currentSelectedId}`);
+    // Remove the selected from the current thumbnail
+    current_img.classList.remove('selected');
     
     // Query the next thumbnail image
     const next_img = document.querySelector(`#n${newSelectedId}`);
@@ -82,7 +81,9 @@ function setupPage(events) {
         img_elm.src = events[i].styled_images.event_thumb;
         thumbElm.append(img_elm);
     }
-    startInterval(0);
+
+    let initialSelectedId = 0;
+    startInterval(initialSelectedId);
 }
 
 getUMEventsWithImages(setupPage);
