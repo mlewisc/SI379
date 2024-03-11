@@ -1,0 +1,114 @@
+* {
+    font-family: 'Poppins';
+}
+p {
+    text-align: center;
+}
+
+h2 {
+    padding-top: 5%;
+    text-align: center;
+    font-weight: bold;
+}
+
+h3 {
+    text-align: center;
+    background-color: green;
+    color: white;
+}
+.sticky {
+    position: fixed;
+    z-index: 99;
+    width: 20%;
+    top:0;
+}
+
+button {
+    cursor: pointer;
+    width: 400px;
+    height: 90px;
+    border-radius: 10px;
+    border: 0px solid transparent;
+    background: #594ECA;
+    color: white;
+    font-weight: 450;
+    text-align: left;
+    padding-inline: 5%;
+    font-size: 16px;
+    overflow: auto;
+}
+
+
+.answers-box {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-row-gap: 40px;
+    grid-column-gap: 40px;
+    justify-items: center;
+    justify-content: center;
+}
+
+.answered {
+    background: #7E7B9B;
+}
+
+.green {
+    background-color: #348800;
+}
+
+.red {
+    background-color: #9C0000;
+}
+
+.question-box {
+    background-color: aliceblue;
+    padding-bottom: 5%;
+}
+
+.modal-background {
+    display: none;
+    background: rgba(0, 0, 0, 0.66);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.modal {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal h3 {
+    color: #594ECA;
+    background-color: white;
+    padding-top: 10%;
+    font-size: 28px;
+    margin-top: 0px;
+}
+
+.small-btn {
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    background-color: white;
+    color:#594ECA;
+    border: 2px solid #594ECA;
+}
+
+.btn-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: center;
+    justify-content: center;
+    grid-gap: 20px;
+    padding-top: 10%;
+}

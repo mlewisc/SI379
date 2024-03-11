@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="main.js" defer></script>
+    <title>Trivia</title>
+</head>
+<body>
+    <div>
+        <h3 class="sticky">Your Score: <span id="current-score">0</span> of <span id="total-answered">0</span></h3>
+    </div>
+    <div class="question-list"></div>
+    <div class="modal-background">
+        <div class="modal">
+            <h3>Congratulations! <br>You've scored <strong><span id="final-score"></span></strong> out of 10 points.</h3>
+            <p>Do you want to play again?</p>
+            <div class="btn-container">
+                <button id="play-again" class="small-btn">Yes, play again!</button>
+                <button id="close" class="small-btn">No, thanks.</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
