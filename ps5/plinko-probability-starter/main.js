@@ -113,6 +113,7 @@ function drawBoard() {
             const { x, y } = getGraphicLocation(col, row); // The new location of the ball (in pixels)
             await moveCircleTo(circle, x, y, DELAY_BETWEEN_PEGS / parseFloat(speedInput.value)); // Move the ball to the new location
 
+
             const peg = pegs[row][col]; // The peg that the ball hit
             hitCounts[row][col]++; // Increment the hit count for this peg
 
@@ -184,9 +185,40 @@ async function changeHeightTo(rect, toHeight, duration) {
 
 // Animates the movement of a circle to a new location
 async function moveCircleTo(circle, cx, cy, duration) {
+    
+    // Collect the current X and Y position 
+    const startCX = parseFloat(circle.getAttribute('cx'));
+    const startCY = parseFloat(circle.getAttribute('cy'));
+
+    // Determine the start of the animation
+    const animationStarted = Date.now();
+
+    const step = () => {
+        const now = Date.now();
+
+        // Calculate what percentage of TIME completed
+        const pct = (now - animationStarted) / duration;
+        // Calculate the multiplier of how far the circle should move (change in position)
+        const pos = easeOutQuad(pct);
+
+        // Change X and Y position value
+        const x = startCX + pos * (cx - startCX);
+        const y = startCY + pos * (cy - startCY);
+
+        // Update cx and cy attribute values
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+
+        // Call requestAnimationFrame until the end time 
+        if(now <= animationStarted + duration) {
+            requestAnimationFrame(step);
+        }
+    }
+    // Start the animation
+    requestAnimationFrame(step);
+
+    // Wait until the animation runs for each circle
     await pause(duration);
-    circle.setAttribute('cx', cx);
-    circle.setAttribute('cy', cy);
 };
 
 
@@ -283,3 +315,5 @@ function redrawBoard() {
 
     clearBoard = drawBoard(); // Draw the new board (and store the cleanup function)
 }
+
+function easeOutQuad(t) { return t*(2-t); }
