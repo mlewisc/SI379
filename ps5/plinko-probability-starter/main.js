@@ -12,7 +12,7 @@ const X_MOVEMENT = 30;             // The horizontal distance between pegs (in p
 const Y_MOVEMENT = 20;             // The vertical distance between pegs (in pixels)
 const DELAY_BETWEEN_BALLS = 1000;  // How long to wait between dropping balls (in milliseconds)
 const DELAY_BETWEEN_PEGS  = 1000;  // How long it takes for a ball to drop from one peg to the next (in milliseconds)
-const DELAY_WHEN_DROP     = 1000;  // How long it takes for the ball to "fall" into the hole (in milliseconds)
+const DELAY_WHEN_DROP     = 3000;  // How long it takes for the ball to "fall" into the hole (in milliseconds)
 let PROBABILITY_RIGHT = 0.5;     // The probability of a ball going right (as opposed to left)
 
 const PADDING = Math.max(PEG_RADIUS, BALL_RADIUS, X_MOVEMENT/2) + 5; // The padding around the edge of the SVG element (in pixels)
@@ -182,7 +182,6 @@ function drawBoard() {
 
 // Animates the height of a rectangle from its current height to a new height
 async function changeHeightTo(rect, toHeight, duration) {
-    await pause(duration);
 
     const startHeight = parseInt(rect.getAttribute('height'));
 
@@ -194,7 +193,7 @@ async function changeHeightTo(rect, toHeight, duration) {
 
         // Calculate what percentage of TIME completed
         const pct = (now - animationStarted) / duration;
-        // Calculate the multiplier of how far the circle should move (change in position)
+        // Calculate the multiplier of how far the rectangle should move (change in position)
         const pos = easeInQuad(pct);
 
         // Change the height value
@@ -208,17 +207,14 @@ async function changeHeightTo(rect, toHeight, duration) {
             requestAnimationFrame(step);
         }
     }
-    
     // Start the animation
-    requestAnimationFrame(step);
-
+    step();
     // Wait until the animation runs for the rectangle
     await pause(duration);
 }
 
 // Animate the ball once it hits its last position
 async function animateLastPosition(circle, duration) {
-    await pause(duration);
 
     // Collect the current position and opacity
     const initalPostion = parseInt(circle.getAttribute('cy'));
@@ -240,7 +236,7 @@ async function animateLastPosition(circle, duration) {
         // Change the position value
         const yPosition = initalPostion + pos * (finalPosition - initalPostion);
         // Change the opacity value
-        const opacity = initalOpacity - pos * (initalOpacity);
+        const opacity = initalOpacity - pct * (initalOpacity);
 
         // Update the height attribute value
         circle.setAttribute('cy', yPosition);
@@ -254,7 +250,7 @@ async function animateLastPosition(circle, duration) {
     }
     
     // Start the animation
-    requestAnimationFrame(step);
+    step();
 
     // Wait until the animation runs for the circle
     await pause(duration);
