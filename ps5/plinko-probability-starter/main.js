@@ -124,10 +124,13 @@ function drawBoard() {
         }
 
 
+
         const finalColHitCount = hitCounts[NUM_LEVELS-1][col]; // The hit count for the final column
         const barIndex = Math.floor(col/2); // The index of the bar that corresponds to the final column (since there are 2 pegs per bar)
         const newBarHeight = BAR_SCALE_FACTOR * finalColHitCount / NUM_BALLS; // The new height of the bar
-        await changeHeightTo(actualBars[barIndex], newBarHeight, DELAY_WHEN_DROP / parseFloat(speedInput.value)); // Animate the change in height of the bar
+        const heightAnimPromise = changeHeightTo(actualBars[barIndex], newBarHeight, DELAY_WHEN_DROP / parseFloat(speedInput.value)); // Animate the change in height of the bar
+        const circleAnimPromise = animateLastPosition(circle, DELAY_WHEN_DROP / parseFloat(speedInput.value)); //
+        await Promise.all([heightAnimPromise, circleAnimPromise]);
 
         circle.remove(); // Remove the circle from the SVG element
     }
@@ -180,15 +183,91 @@ function drawBoard() {
 // Animates the height of a rectangle from its current height to a new height
 async function changeHeightTo(rect, toHeight, duration) {
     await pause(duration);
-    rect.setAttribute('height', toHeight);
+
+    const startHeight = parseInt(rect.getAttribute('height'));
+
+    // Determine the start of the animation
+    const animationStarted = Date.now();
+
+    const step = () => {
+        const now = Date.now();
+
+        // Calculate what percentage of TIME completed
+        const pct = (now - animationStarted) / duration;
+        // Calculate the multiplier of how far the circle should move (change in position)
+        const pos = easeInQuad(pct);
+
+        // Change the height value
+        const height = startHeight + pos * (toHeight - startHeight);
+
+        // Update the height attribute value
+        rect.setAttribute('height', height);
+
+        // Call requestAnimationFrame until the end time 
+        if(now <= animationStarted + duration) {
+            requestAnimationFrame(step);
+        }
+    }
+    
+    // Start the animation
+    requestAnimationFrame(step);
+
+    // Wait until the animation runs for the rectangle
+    await pause(duration);
 }
+
+// Animate the ball once it hits its last position
+async function animateLastPosition(circle, duration) {
+    await pause(duration);
+
+    // Collect the current position and opacity
+    const initalPostion = parseInt(circle.getAttribute('cy'));
+    const initalOpacity = parseFloat(circle.getAttribute('opacity'));
+    // Define the final position (20px downward)
+    const finalPosition = initalPostion + 20;
+    
+    // Determine the start of the animation
+    const animationStarted = Date.now();
+
+    const step = () => {
+        const now = Date.now();
+
+        // Calculate what percentage of TIME completed
+        const pct = (now - animationStarted) / duration;
+        // Calculate the multiplier of how far the circle should move (change in position)
+        const pos = easeOutQuad(pct);
+
+        // Change the position value
+        const yPosition = initalPostion + pos * (finalPosition - initalPostion);
+        // Change the opacity value
+        const opacity = initalOpacity - pos * (initalOpacity);
+
+        // Update the height attribute value
+        circle.setAttribute('cy', yPosition);
+        // Update the opacity attribute value
+        circle.setAttribute('opacity', opacity);
+
+        // Call requestAnimationFrame until the end time 
+        if(now <= animationStarted + duration) {
+            requestAnimationFrame(step);
+        }
+    }
+    
+    // Start the animation
+    requestAnimationFrame(step);
+
+    // Wait until the animation runs for the circle
+    await pause(duration);
+}
+    
+
 
 // Animates the movement of a circle to a new location
 async function moveCircleTo(circle, cx, cy, duration) {
     
     // Collect the current X and Y position 
-    const startCX = parseFloat(circle.getAttribute('cx'));
-    const startCY = parseFloat(circle.getAttribute('cy'));
+    const startCX = parseInt(circle.getAttribute('cx'));
+    const startCY = parseInt(circle.getAttribute('cy'));
 
     // Determine the start of the animation
     const animationStarted = Date.now();
@@ -217,7 +296,7 @@ async function moveCircleTo(circle, cx, cy, duration) {
     // Start the animation
     requestAnimationFrame(step);
 
-    // Wait until the animation runs for each circle
+    // Wait until the animation runs for the circle
     await pause(duration);
 };
 
@@ -317,3 +396,4 @@ function redrawBoard() {
 }
 
 function easeOutQuad(t) { return t*(2-t); }
+function easeInQuad(t) { return t*t; }
