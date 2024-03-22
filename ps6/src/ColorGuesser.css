@@ -1,0 +1,72 @@
+:root {
+    --row-height: 40px;
+    --picker-width: 300px;
+}
+
+.App {
+    text-align: center;
+}
+
+#color-preview {
+    width: var(--picker-width);
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#guess-preview {
+    width: var(--picker-width);
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#color-picker {
+    display: table;
+    width: var(--picker-width);
+    margin: auto;
+}
+
+#color-picker > .row {
+    display: table-row;
+    height: var(--row-height);
+}
+
+#color-picker > .row > .component-color-preview {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: right;
+    font-weight: bold;
+}
+
+#color-picker input[type="number"] {
+    width: 48px;
+    height: var(--row-height);
+    text-align: center;
+}
+
+#color-picker input[type="range"] {
+    position: relative;
+    top: 5px;
+    background-color: red;
+}
+
+#cheating-mode {
+    position: absolute;
+    right: 10px;
+}
+
+p {
+    text-align: center;
+    padding-block: 2%;
+    margin: auto;
+}
+
+button {
+    font-size: 24px;
+    margin: 1%;
+}

@@ -129,7 +129,7 @@ function drawBoard() {
         const barIndex = Math.floor(col/2); // The index of the bar that corresponds to the final column (since there are 2 pegs per bar)
         const newBarHeight = BAR_SCALE_FACTOR * finalColHitCount / NUM_BALLS; // The new height of the bar
         const heightAnimPromise = changeHeightTo(actualBars[barIndex], newBarHeight, DELAY_WHEN_DROP / parseFloat(speedInput.value)); // Animate the change in height of the bar
-        const circleAnimPromise = animateLastPosition(circle, DELAY_WHEN_DROP / parseFloat(speedInput.value)); //
+        const circleAnimPromise = animateLastPosition(circle, DELAY_WHEN_DROP / parseFloat(speedInput.value)); // Animate the change in position and opacity of the ball
         await Promise.all([heightAnimPromise, circleAnimPromise]);
 
         circle.remove(); // Remove the circle from the SVG element
