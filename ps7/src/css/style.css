@@ -1,0 +1,171 @@
+* {
+  font-family: "Quicksand";
+}
+#root {
+  margin: 5rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.task-container {
+  display: flex;
+  flex-direction: column;
+  margin-inline: 4rem;
+}
+
+.task-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #6262621c;
+}
+
+.task-row:last-of-type {
+  border-bottom: none;
+}
+
+button.start-btn {
+  padding: 0.5rem 3rem;
+  font-size: 1.5rem;
+  border: 1.5px solid #198754;
+  border-radius: 4px;
+  color: #198754;
+  background: transparent;
+  cursor: pointer;
+}
+
+button.start-btn:hover {
+  background-color: #198754;
+  color: white;
+}
+
+button.stop-btn {
+  padding: 0.5rem 3rem;
+  font-size: 1.5rem;
+  border: 1.5px solid #be0a31;
+  border-radius: 4px;
+  color: #be0a31;
+  background: transparent;
+  cursor: pointer;
+}
+
+button.stop-btn:hover {
+  background-color: #be0a31;
+  color: white;
+}
+
+button.add-task {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 2rem;
+  padding-block: 0.5rem;
+  cursor: pointer;
+}
+
+button.add-task:hover {
+  background-color: #095bd7;
+}
+
+button.remove-btn {
+  color: #be0a31;
+  background-color: transparent;
+  border: 1px solid #be0a31;
+  border-radius: 4px;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: none;
+}
+
+button.remove-btn:hover {
+  background-color: #be0a31;
+  color: white;
+}
+
+input::placeholder {
+  color: #8eb0e2;
+}
+
+button.remove-btn.show-remove {
+  display: block;
+}
+
+input {
+  color: #0d6efd;
+  font-size: 2rem;
+  border: none;
+}
+
+input:disabled {
+  background-color: transparent;
+  color: #a4afbf9c;
+}
+
+.task-input {
+  display: flex;
+  align-items: stretch;
+}
+
+input:focus-visible {
+  border: 2px solid #0d6efd;
+}
+
+.interval-control-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 2.5rem;
+  margin-block: 2rem;
+  align-items: center;
+}
+
+.interval-control {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+input#work-time,
+input#break-time {
+  font-size: 1rem;
+  color: black;
+  border: 1px solid rgba(117, 117, 117, 0.31);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  width: 14rem;
+}
+
+.work-time-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.timer {
+  margin-right: 5rem;
+}
+
+.lemons {
+  font-size: 1.5rem;
+  display: flex;
+}
+
+.break-timer-overlay {
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
