@@ -17,7 +17,13 @@ export default function Tasks(props) {
   const [h1Visible, setH1Visible] = React.useState(true);
 
   function onAdd() {
-    setTaskList(taskList.concat({ key: keyId, value: "", numLemons: 0 }));
+    const newTaskList = taskList.concat({
+      key: keyId,
+      value: "",
+      numLemons: 0,
+    });
+    setTaskList(newTaskList);
+    localStorageState(newTaskList);
     keyId++;
   }
 
